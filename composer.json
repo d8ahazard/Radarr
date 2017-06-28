@@ -1,0 +1,23 @@
+{
+    "name": "kryptonit3/radarr",
+    "description": "PHP Radarr API Wrapper",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Jesse Szypulski",
+            "email": "jesse.szypulski@gmail.com"
+        },
+        {
+            "name": "Digitalhigh",
+            "email": "donate.to.digitalhigh@gmail.com"
+        }
+    ],
+    "require": {
+        "guzzlehttp/guzzle": "^6.3"
+    },
+    "autoload": {
+        "psr-4": {
+            "Kryptonit3\\Radaarr\\": "src/"
+        }
+    }
+}
