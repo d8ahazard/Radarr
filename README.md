@@ -5,12 +5,12 @@ Here is the Radarr API Documentation that this package implements: https://githu
 
 ## Installation
 ```ruby
-composer require kryptonit3/radarr
+composer require digitalhigh/radarr
 ```
 
 ## Example Usage
 ```php
-use Kryptonit3\Radarr\Radarr;
+use digitalhigh\Radarr\Radarr;
 ```
 ```php
 public function addMovie()
