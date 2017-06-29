@@ -17,7 +17,7 @@
     },
     "autoload": {
         "psr-4": {
-            "digitalhigh\\Radaarr\\": "src/"
+            "digitalhigh\\Radarr\\": "src/"
         }
     }
 }
