@@ -1,6 +1,6 @@
 <?php
 
-namespace Kryptonit3\Radarr\Exceptions;
+namespace digitalhigh\Radarr\Exceptions;
 
 class InvalidException extends \Exception
 {

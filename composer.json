@@ -1,5 +1,5 @@
 {
-    "name": "kryptonit3/radarr",
+    "name": "digitalhigh/radarr",
     "description": "PHP Radarr API Wrapper",
     "license": "MIT",
     "authors": [
@@ -17,7 +17,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Kryptonit3\\Radaarr\\": "src/"
+            "digitalhigh\\Radaarr\\": "src/"
         }
     }
 }

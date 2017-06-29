@@ -1,9 +1,9 @@
 <?php
 
-namespace Kryptonit3\Radarr;
+namespace digitalhigh\Radarr;
 
 use GuzzleHttp\Client;
-use Kryptonit3\Radarr\Exceptions\InvalidException;
+use digitalhigh\Radarr\Exceptions\InvalidException;
 
 class Radarr
 {
