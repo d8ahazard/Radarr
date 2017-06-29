@@ -166,10 +166,9 @@ class Radarr
 	 * @internal param $movieId
 	 */
 
-    public function getMovies($id = null, $title = null)
+    public function getMovies($id = null)
     {
 	    $uri = ($id) ? 'movie/' . $id : 'movie';
-	    $uri = ($title) ? 'lookup/?term='.urlencode($title) : $uri;
 
         try {
             $response = $this->_request(
@@ -184,6 +183,30 @@ class Radarr
 
         return $response->getBody()->getContents();
     }
+
+	/**
+	 * Searches for new shows on trakt
+	 * Search by name or tvdbid
+	 * Example: 'The Blacklist' or 'tvdb:266189'
+	 *
+	 * @param string $searchTerm query string for the search (Use tvdb:12345 to lookup TVDB ID 12345)
+	 * @return string
+	 */
+	public function getMoviesLookup($searchTerm)
+	{
+		$uri = 'movies/lookup';
+		$uriData = [
+			'term' => $searchTerm
+		];
+
+		$response = [
+			'uri' => $uri,
+			'type' => 'get',
+			'data' => $uriData
+		];
+
+		return $this->processRequest($response);
+	}
 
 	/**
 	 * Adds a new movie to your collection
@@ -209,28 +232,12 @@ class Radarr
     {
         $uri = 'movie';
 
-	    $uriData = [];
-	    // Required
-	    $uriData['tmdbId'] = $data['tmdbId'];
-	    $uriData['title'] = $data['title'];
-	    $uriData['qualityProfileId'] = $data['qualityProfileId'];
-	    $uriData['profileId'] = $data['profileId'];
-	    if ( array_key_exists('titleSlug', $data) ) { $uriData['titleSlug'] = $data['titleSlug']; }
-	    if ( array_key_exists('path', $data) ) { $uriData['path'] = $data['path']; }
-	    if ( array_key_exists('rootFolderPath', $data) ) { $uriData['rootFolderPath'] = $data['rootFolderPath']; }
-	    if ( array_key_exists('monitored', $data) ) { $uriData['monitored'] = $data['monitored']; }
-	    $uriData['addOptions'] = [
-		    'ignoreEpisodesWithFiles' => false,
-		    'ignoreEpisodesWithoutFiles' => false,
-		    'searchForMovie' =>true
-	    ];
-
 	    try {
 		    $response = $this->_request(
 		    	[
 		    	'uri' => $uri,
 			    'type' => 'post',
-			    'data' => $uriData
+			    'data' => $data
 		        ]
 	    );
 	    } catch ( \Exception $e ) {
@@ -462,7 +469,37 @@ class Radarr
         }
     }
 
-    /**
+	/**
+	 * Process requests, catch exceptions, return json response
+	 *
+	 * @param array $request uri, type, data from method
+	 * @return string json encoded response
+	 */
+	protected function processRequest(array $request)
+	{
+		try {
+			$response = $this->_request(
+				[
+					'uri' => $request['uri'],
+					'type' => $request['type'],
+					'data' => $request['data']
+				]
+			);
+		} catch ( \Exception $e ) {
+			echo json_encode(array(
+				'error' => array(
+					'msg' => $e->getMessage(),
+					'code' => $e->getCode(),
+				),
+			));
+
+			exit();
+		}
+
+		return $response->getBody()->getContents();
+	}
+
+	/**
      * Verify date is in proper format
      *
      * @param $date
