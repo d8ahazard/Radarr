@@ -368,6 +368,29 @@ class Radarr
 
 
     /**
+	 *
+	 * Returns the banner for the specified movie
+	 *
+	 * @param $movieId
+	 * @return string
+	 * @throws InvalidException
+	 */
+	public function getBanner($movieId) {
+	    $uri = 'MediaCover/'.$movieId.'/banner.jpg';
+	    try {
+		    $response = $this->_request(
+			    [
+				    'uri' => $uri,
+				    'type' => 'get',
+				    'data' => []
+			    ]
+		    );
+	    }catch ( \Exception $e ) {
+		    throw new InvalidException($e->getMessage());
+	    }
+	    return $response->getBody()->getContents();
+	}
+    /**
      * Gets root folder
      *
      * @return array|object|string
