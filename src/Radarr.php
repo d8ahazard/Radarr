@@ -194,7 +194,7 @@ class Radarr
 	 */
 	public function getMoviesLookup($searchTerm)
 	{
-		$uri = 'movies/lookup';
+		$uri = 'movie/lookup';
 		$uriData = [
 			'term' => $searchTerm
 		];
