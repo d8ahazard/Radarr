@@ -1,11 +1,11 @@
 # Radarr
 PHP Wrapper for Radarr https://radarr.video/
 
-Here is the Radarr API Documentation that this package implements: https://github.com/Radarr/Radarr/wiki/API
+Here is the Radarr API Documentation that this package implements: https://radarr.video/docs/api/
 
 ## Installation
 ```ruby
-composer require digitalhigh/radarr
+composer require digitalhigh/radarr:dev-master
 ```
 
 ## Example Usage

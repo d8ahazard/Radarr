@@ -14,7 +14,7 @@ class Radarr
 
     public function __construct($url, $apiKey, $httpAuthUsername = null, $httpAuthPassword = null)
     {
-        $this->url = rtrim($url, '/\\'); // Example: http://127.0.0.1:8989 (no trailing forward-backward slashes)
+        $this->url = rtrim($url, '/\\').'/api/v3/'; // Example: http://127.0.0.1:8989 (no trailing forward-backward slashes)
         $this->apiKey = $apiKey;
         $this->httpAuthUsername = $httpAuthUsername;
         $this->httpAuthPassword = $httpAuthPassword;
@@ -465,28 +465,28 @@ class Radarr
             ];
         }
 
-        if ( $params['type'] == 'get' ) {
-            $url = $this->url . '/api/' . $params['uri'] . '?' . http_build_query($params['data']);
+        if ($params['type'] == 'get') {
+            $url = $this->url.$params['uri'].'?'.http_build_query($params['data']);
 
             return $client->get($url, $options);
         }
 
-        if ( $params['type'] == 'put' ) {
-            $url = $this->url . '/api/' . $params['uri'];
+        if ($params['type'] == 'put') {
+            $url = $this->url.$params['uri'];
             $options['json'] = $params['data'];
-            
+
             return $client->put($url, $options);
         }
 
-        if ( $params['type'] == 'post' ) {
-            $url = $this->url . '/api/' . $params['uri'];
+        if ($params['type'] == 'post') {
+            $url = $this->url.$params['uri'];
             $options['json'] = $params['data'];
-            
+
             return $client->post($url, $options);
         }
 
-        if ( $params['type'] == 'delete' ) {
-            $url = $this->url . '/api/' . $params['uri'] . '?' . http_build_query($params['data']);
+        if ($params['type'] == 'delete') {
+            $url = $this->url.$params['uri'].'?'.http_build_query($params['data']);
 
             return $client->delete($url, $options);
         }
